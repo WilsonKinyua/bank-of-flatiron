@@ -36,9 +36,19 @@ function AccountContainer() {
       });
   };
 
+  // search transactions
+  const searchHandler = (search) => {
+    const filteredTransactions = transactions.filter((transaction) => {
+      return transaction.description
+        .toLowerCase()
+        .includes(search.toLowerCase());
+    });
+    setTransactions(filteredTransactions.slice(-1));
+  };
+
   return (
     <div>
-      <Search />
+      <Search search={searchHandler} />
       <AddTransactionForm addTransaction={addTransactionHandler} />
       <TransactionsList transactions={transactions} />
     </div>
